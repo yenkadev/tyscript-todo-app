@@ -7,20 +7,17 @@ const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  const handleAddTask = () => {
+  const handleAddTodo = () => {
     if (todo) {
-      console.log(todo);
       setTodoList([...todoList, { id: Date.now(), todo, isDone: false }]);
       setTodo("");
     }
   };
 
-  console.log("todoList", todoList);
-
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Taskify</h1>
-      <InputField todo={todo} setTodo={setTodo} handleAddTask={handleAddTask} />
+      <InputField todo={todo} setTodo={setTodo} handleAddTodo={handleAddTodo} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
     </div>
   );

@@ -3,18 +3,18 @@ import React from "react";
 interface InputFieldProps {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAddTask: () => void;
+  handleAddTodo: () => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   todo,
   setTodo,
-  handleAddTask,
+  handleAddTodo,
 }) => {
   return (
     <form
       onSubmit={(e) => {
-        handleAddTask();
+        handleAddTodo();
         e.preventDefault();
       }}
     >

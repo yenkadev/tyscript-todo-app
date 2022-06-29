@@ -3,7 +3,7 @@ import React from "react";
 interface InputFieldProps {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAddTask: (e: React.FormEvent) => void;
+  handleAddTask: () => void;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -14,7 +14,7 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <form
       onSubmit={(e) => {
-        handleAddTask(e);
+        handleAddTask();
         e.preventDefault();
       }}
     >

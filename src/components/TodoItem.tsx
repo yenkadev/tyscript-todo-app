@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import { Todo } from "../constants";
+import TodoList from "./TodoList";
 
 interface TodoItemProps {
   todoItem: Todo;
@@ -35,6 +36,21 @@ const TodoItem: React.FC<TodoItemProps> = ({
     setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
   };
 
+  const handleDoneTodo = (id: number) => {
+    setTodoList(
+      todoList.map((todoItem) =>
+        todoItem.id === id
+          ? {
+              ...todoItem,
+              isDone: !todoItem.isDone,
+            }
+          : todoItem
+      )
+    );
+  };
+
+  console.log("todoList", todoList);
+
   useEffect(() => inpuRef.current?.focus(), [isEdit]);
 
   console.log("isEdit", isEdit);
@@ -56,6 +72,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           ref={inpuRef}
         />
       ) : (
+        // Check isDone to add style here
         <p>{todoItem?.todo}</p>
       )}
       <ul>
@@ -74,7 +91,12 @@ const TodoItem: React.FC<TodoItemProps> = ({
             color="orange"
             onClick={() => handleDeleteTodo(todoItem?.id)}
           />
-          <Icon icon="checkmark" size={20} color="orange" />
+          <Icon
+            icon="checkmark"
+            size={20}
+            color="orange"
+            onClick={() => handleDoneTodo(todoItem?.id)}
+          />
         </li>
       </ul>
     </form>

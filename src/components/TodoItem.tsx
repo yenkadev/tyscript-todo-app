@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Icon from "./Icon";
 import { Todo } from "../constants";
 
@@ -13,18 +13,61 @@ const TodoItem: React.FC<TodoItemProps> = ({
   todoList,
   setTodoList,
 }) => {
+  const [isEdit, setEdit] = useState<boolean>(false);
+  const [isEditValue, setEditValue] = useState<string>(todoItem.todo);
+
+  const inpuRef = useRef<HTMLInputElement>(null);
+
+  const handleEditTodo = (id: number) => {
+    setTodoList(
+      todoList.map((todoItem) =>
+        todoItem.id === id
+          ? {
+              ...todoItem,
+              todo: isEditValue,
+            }
+          : todoItem
+      )
+    );
+  };
+
   const handleDeleteTodo = (id: number) => {
     setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
   };
 
-  console.log("todoList", todoList);
+  useEffect(() => inpuRef.current?.focus(), [isEdit]);
+
+  console.log("isEdit", isEdit);
 
   return (
-    <div>
-      <p>{todoItem?.todo}</p>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleEditTodo(todoItem.id);
+      }}
+    >
+      {isEdit ? (
+        <input
+          type="text"
+          value={isEditValue}
+          onChange={(e) => {
+            setEditValue(e.target.value);
+          }}
+          ref={inpuRef}
+        />
+      ) : (
+        <p>{todoItem?.todo}</p>
+      )}
       <ul>
         <li>
-          <Icon icon="pencil" size={20} color="orange" />
+          <Icon
+            icon="pencil"
+            size={20}
+            color="orange"
+            onClick={() => {
+              setEdit(!isEdit);
+            }}
+          />
           <Icon
             icon="bin"
             size={20}
@@ -34,7 +77,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           <Icon icon="checkmark" size={20} color="orange" />
         </li>
       </ul>
-    </div>
+    </form>
   );
 };
 

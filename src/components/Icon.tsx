@@ -1,6 +1,6 @@
 import React from "react";
-import IcoMoon, { IconProps } from "react-icomoon";
 import iconSet from "./../icomoon.json";
+import IcoMoon, { IconProps } from "react-icomoon";
 
 const Icon = (props: IconProps) => {
   return <IcoMoon iconSet={iconSet} {...props} />;

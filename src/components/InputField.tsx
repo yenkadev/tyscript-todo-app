@@ -1,4 +1,5 @@
 import React from "react";
+import classes from "./../scss/main.module.scss";
 
 interface InputFieldProps {
   todo: string;
@@ -17,6 +18,7 @@ const InputField: React.FC<InputFieldProps> = ({
         handleAddTodo();
         e.preventDefault();
       }}
+      className={classes.formGroup}
     >
       <input
         type="input"
@@ -25,6 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({
           setTodo(e.target.value);
         }}
         placeholder="Enter a task"
+        className={classes.formControl}
       />
       <button type="submit">Enter</button>
     </form>

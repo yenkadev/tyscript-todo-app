@@ -1,6 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 import { Todo } from "../constants";
+import classes from "./../scss/main.module.scss";
 
 interface TodoListProps {
   todoList: Todo[];
@@ -9,7 +10,7 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todoList, setTodoList }) => {
   return (
-    <div>
+    <ul className={classes.listTodo}>
       {todoList?.map((todoItem, index) => (
         <TodoItem
           key={index}
@@ -18,7 +19,7 @@ const TodoList: React.FC<TodoListProps> = ({ todoList, setTodoList }) => {
           setTodoList={setTodoList}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
